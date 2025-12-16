@@ -12,6 +12,12 @@ from api.routes import router
 import uvicorn
 import sys
 import time
+# At the very beginning of main.py, before creating app
+import os
+if not os.path.exists("models/text_model_final/config.json"):
+    print("⚠️  Model not found, downloading...")
+    from download_model import download_and_extract_model
+    download_and_extract_model()
 
 # Create FastAPI app with metadata
 app = FastAPI(
