@@ -21,7 +21,7 @@ def download_and_extract_model():
     # Format: https://drive.google.com/file/d/FILE_ID/view?usp=sharing
     # Extract FILE_ID and use: https://drive.google.com/uc?id=FILE_ID
     
-    GOOGLE_DRIVE_FILE_ID = "YOUR_FILE_ID_HERE"  # Replace with your file ID
+    GOOGLE_DRIVE_FILE_ID = "1crauuXzU8VFzUATVtNJV71pIqJ6wFAbm"  # Replace with your file ID
     url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}"
     output = "model_files.zip"
     
@@ -56,3 +56,5 @@ def download_and_extract_model():
 
 if __name__ == "__main__":
     download_and_extract_model()
+
+## https://drive.google.com/file/d/1crauuXzU8VFzUATVtNJV71pIqJ6wFAbm/view?usp=sharing
