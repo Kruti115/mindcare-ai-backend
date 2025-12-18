@@ -5,6 +5,30 @@ MindCare AI - Mental Health Analysis API
 Main application file with FastAPI server configuration
 """
 
+# At the very beginning of main.py
+
+import os
+import sys
+
+# Force model download before starting API
+print("🔍 Checking for model files...")
+model_path = "models/text_model_final"
+pytorch_model = os.path.join(model_path, "pytorch_model.bin")
+safetensors_model = os.path.join(model_path, "model.safetensors")
+
+if not os.path.exists(pytorch_model) and not os.path.exists(safetensors_model):
+    print("❌ Model weights not found!")
+    print("📥 Triggering model download...")
+    
+    try:
+        from download_model import download_and_extract_model
+        download_and_extract_model()
+        print("✅ Model download complete!")
+    except Exception as e:
+        print(f"❌ Model download failed: {e}")
+        print("⚠️  API will start but predictions may fail")
+
+
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
