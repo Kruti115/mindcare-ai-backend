@@ -7,30 +7,27 @@ Main application file with FastAPI server configuration
 
 # At the very beginning of main.py
 
+# At the very beginning of main.py (after imports)
 import os
-import sys
 
-# # Force model download before starting API
-# print("🔍 Checking for model files...")
-# model_path = "models/text_model_final"
-# pytorch_model = os.path.join(model_path, "pytorch_model.bin")
-# safetensors_model = os.path.join(model_path, "model.safetensors")
+# Check and download model if needed
+print("🔍 Checking for model files...")
+model_path = "models/text_model_final"
+pytorch_model = os.path.join(model_path, "pytorch_model.bin")
+safetensors_model = os.path.join(model_path, "model.safetensors")
 
-# if not os.path.exists(pytorch_model) and not os.path.exists(safetensors_model):
-#     print("❌ Model weights not found!")
-#     print("📥 Triggering model download...")
-    
-#     try:
-#         from download_model import download_and_extract_model
-#         download_and_extract_model()
-#         print("✅ Model download complete!")
-#     except Exception as e:
-#         print(f"❌ Model download failed: {e}")
-#         print("⚠️  API will start but predictions may fail")
-# Skip model download on free tier (memory limit 512MB)
-print("⚠️  Running without pre-loaded model (free tier memory limit)")
-print("   Model will load on first request if files are present")
+if not os.path.exists(pytorch_model) and not os.path.exists(safetensors_model):
+    print("📥 Model not found, downloading...")
+    try:
+        from download_model import download_and_extract_model
+        download_and_extract_model()
+    except Exception as e:
+        print(f"⚠️  Model download failed: {e}")
+        print("   API will start but may have limited functionality")
+else:
+    print("✅ Model files found!")
 
+# Continue with rest of main.py...
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
