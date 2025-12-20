@@ -19,7 +19,7 @@ def download_and_extract_model():
     print("📥 Downloading trained model from Google Drive...")
     
     # YOUR GOOGLE DRIVE FILE ID
-    GOOGLE_DRIVE_FILE_ID = "1JZZuGp8QpjJg_ZOKLOd2gQZos0zDNROU"  # From your logs
+    GOOGLE_DRIVE_FILE_ID = "https://drive.google.com/drive/folders/1JZZuGp8QpjJg_ZOKLOd2gQZos0zDNROU?usp=sharing"  # From your logs
     
     url = f"https://drive.google.com/uc?id={GOOGLE_DRIVE_FILE_ID}&export=download"
     output = "model_files.zip"
